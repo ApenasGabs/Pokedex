@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getPokemon } from "./api";
+import { Layout } from "antd";
+import { getPokelist } from "./api";
 import "./App.css";
 import Pokedex from "./components/Pokedex/Pokedex";
 import { PokeList } from "./components/Pokedex/Pokedex.types";
@@ -10,7 +11,7 @@ function App() {
   const fetchPokemons = async () => {
     try {
       setIsloading(true);
-      const result = await getPokemon();
+      const result = await getPokelist();
       setPokemons(result);
       setIsloading(false);
     } catch (error) {
@@ -21,12 +22,14 @@ function App() {
     console.log("carregou");
     fetchPokemons();
   }, []);
-
   return (
     <div className="App">
       <header className="App-header">
         <Pokedex pokemons={pokemons?.results} isLoading={isLoading} />
       </header>
+      <Layout.Footer style={{ textAlign: "center" }}>
+        Made with ❤️ by Apenasgabs
+      </Layout.Footer>
     </div>
   );
 }
