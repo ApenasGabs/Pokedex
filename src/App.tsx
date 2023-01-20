@@ -22,10 +22,16 @@ function App() {
     console.log("carregou");
     fetchPokemons();
   }, []);
+  const noPoke = <p>Ainda nao ha nada por aqui </p>;
+
   return (
     <div className="App">
       <header className="App-header">
-        <Pokedex pokemons={pokemons?.results} isLoading={isLoading} />
+        {pokemons ? (
+          <Pokedex pokemons={pokemons.results} isLoading={isLoading} />
+        ) : (
+          noPoke
+        )}
       </header>
       <Layout.Footer style={{ textAlign: "center" }}>
         Made with ❤️ by Apenasgabs

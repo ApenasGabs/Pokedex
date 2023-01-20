@@ -1,15 +1,22 @@
+import { useMemo } from "react";
+import { getPokemonInfo } from "../../api";
 import PokemonCard from "../Pokemon/Pokedex/PokemonCard";
 import { Result } from "./Pokedex.types";
 import { List } from "antd";
 
-const Pokedex = (props: { pokemons: Result[] | undefined; isLoading: any }) => {
+const Pokedex = (props: { pokemons: Result[]; isLoading: any }) => {
   const { pokemons } = props;
+  const pokelistDetails = useMemo(() => {
+    return getPokemonInfo(pokemons);
+  }, [pokemons]);
+
   const pokeList = (
     <List
       grid={{ gutter: 16, column: 6 }}
       dataSource={pokemons}
-      renderItem={(pokemon) => (
+      renderItem={(pokemon, idx) => (
         <List.Item>
+          {/* {pokelistDetails} */}
           <PokemonCard Pokemon={pokemon} />
         </List.Item>
       )}
